@@ -11,11 +11,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -92,7 +93,7 @@ fun HomeScreen() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Home Screen")
+        OutLineTextFieldSample()
     }
 }
 
@@ -102,8 +103,33 @@ fun StatusScreen() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Status Screen")
+        LabelAndPlaceHolder()
+
     }
+}
+@Composable
+fun LabelAndPlaceHolder() {
+    var text by remember { mutableStateOf(TextFieldValue("")) }
+    TextField(
+        value = text,
+        onValueChange = {
+            text = it
+        },
+        label = { Text(text = "Your Label") },
+        placeholder = { Text(text = "Your Placeholder/Hint") },
+    )
+}
+
+@Composable
+fun OutLineTextFieldSample() {
+    var text by remember {
+        mutableStateOf(TextFieldValue(""))
+    }
+    OutlinedTextField(value = text,
+        label = { Text(text = "Enter your Full Name")},
+        onValueChange = {
+            text = it
+        } )
 }
 
 @Composable
